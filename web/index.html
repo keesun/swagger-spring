@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>SS 2011 Keynote</title>
+    <script type="text/javascript" src="scripts/jquery-1.7.min.js"></script>
+    <script src="http://localhost:80/socket.io/socket.io.js"></script>
+    <script>
+        // socket.io connection
+        var socket = io.connect('http://localhost:80');
+
+        // receive first message
+        socket.on('news', function (data) {
+            $('#node ul').prepend('<li>' + data.hello + '</li>');
+            console.log(data);
+        });
+
+        // receive chatting message
+        socket.on('chat', function (data) {
+            console.log(data);
+            $('#node ul').prepend('<li>' + data.message.from + ': ' + data.message.message + '</li>');
+        });
+    </script>
+</head>
+<body>
+<form id="chatForm">
+    <div id="spring">
+        <h1>Spring MVC</h1>
+        <p>
+            <label>from</label>
+            <input id="fromText" type="text" name="from"/>
+        </p>
+
+        <p>
+            <label>message</label>
+            <textarea id="msgText" name="message"></textarea>
+        </p>
+        <input id="sendBtn" type="submit" value="send" onclick="return false;"/>
+    </div>
+    <div id="node">
+        <h1>Node.JS</h1>
+        <ul></ul>
+    </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $("#fromText").val("").focus();
+
+        $("#sendBtn").click(function(event){
+            event.preventDefault();
+
+            $.post("/send", $("#chatForm").serialize(), function(data) {
+//                alert(data);
+            });
+
+            $("#fromText").val("").focus();
+            $("#msgText").val("");
+        });
+    });
+</script>
+</body>
+</html>
