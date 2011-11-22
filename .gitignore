@@ -1,2 +1,4 @@
 .idea/
 target/
+web/WEB-INF/classes/
+web/WEB-INF/lib/

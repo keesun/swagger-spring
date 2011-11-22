@@ -6,9 +6,8 @@ import org.springframework.test.web.server.MockMvc;
 import org.springframework.test.web.server.setup.MockMvcBuilder;
 import org.springframework.test.web.server.setup.MockMvcBuilders;
 
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.server.result.MockMvcResultActions.response;
+import static org.springframework.test.web.server.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.server.result.MockMvcResultMatchers.*;
 
 /**
  * @author: keesunbaik
@@ -21,8 +20,8 @@ public class ChatControllerTest {
                 .xmlConfigSetup("classpath:/applicationContext.xml", "file:web/WEB-INF/keynote-servlet.xml")
                 .build();
         mockMvc.perform(post("/send").param("message", "HELLO BOM_SAK").param("from", "keesun"))
-                .andExpect(response().status().isOk())
-                .andExpect(response().content().isEqualTo("ok"));
+                .andExpect(status().isOk())
+                .andExpect(content().string("ok"));
     }
 
 }
