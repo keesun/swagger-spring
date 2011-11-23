@@ -12,12 +12,15 @@ public class ChatService {
     @Autowired ChatRepository repository;
 
     public void send(Chat chat){
+    	System.out.println("=================send chat===============");
         repository.save(chat);
         exchange(chat);
+        System.out.println(chat);
+        System.out.println("=========================================");
     }
 
     private void exchange(Chat chat) {
-        rabbitTemplate.convertAndSend("myq", chat.getId());
+        rabbitTemplate.convertAndSend("my-chat", chat.getId());
     }
 
 }

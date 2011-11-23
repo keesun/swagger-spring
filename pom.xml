@@ -27,6 +27,12 @@
     </properties>
 
     <dependencies>
+    	<!-- CloudFoundry -->
+    	<dependency>
+    		<groupId>org.cloudfoundry</groupId>
+    		<artifactId>cloudfoundry-runtime</artifactId>
+    		<version>0.8.1</version>
+    	</dependency>    	
         <!-- Core Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

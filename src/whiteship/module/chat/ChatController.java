@@ -14,7 +14,7 @@ public class ChatController {
     @Autowired
     ChatService service;
 
-    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    @RequestMapping(value = "/send/from/{from}/message/{message}")
     public @ResponseBody String send(Chat chat) {
         service.send(chat);
         return "ok";

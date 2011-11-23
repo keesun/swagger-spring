@@ -16,13 +16,12 @@ public class Chat {
     Date created;
 
     public Chat(){
-
+        this.created = new Date();
     }
 
     public Chat(String from, String message) {
         this.from = from;
         this.message = message;
-        this.created = new Date();
     }
 
     public String getFrom() {

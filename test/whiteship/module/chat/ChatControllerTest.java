@@ -19,7 +19,7 @@ public class ChatControllerTest {
         MockMvc mockMvc = MockMvcBuilders
                 .xmlConfigSetup("classpath:/applicationContext.xml", "file:web/WEB-INF/keynote-servlet.xml")
                 .build();
-        mockMvc.perform(post("/send").param("message", "HELLO BOM_SAK").param("from", "keesun"))
+        mockMvc.perform(post("/send/from/ks/message/hello ks"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("ok"));
     }

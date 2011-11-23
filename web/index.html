@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8"/>
     <title>SS 2011 Keynote</title>
     <script type="text/javascript" src="scripts/jquery-1.7.min.js"></script>
-    <script src="http://localhost:80/socket.io/socket.io.js"></script>
+    <script src="http://10.66.36.235:80/socket.io/socket.io.js"></script>
     <script>
         // socket.io connection
-        var socket = io.connect('http://localhost:80');
+        var socket = io.connect('http://10.66.36.235:80');
 
         // receive first message
         socket.on('news', function (data) {
@@ -30,10 +30,9 @@
             <label>from</label>
             <input id="fromText" type="text" name="from"/>
         </p>
-
         <p>
             <label>message</label>
-            <textarea id="msgText" name="message"></textarea>
+            <input type="text" id="msgText" name="message"/>
         </p>
         <input id="sendBtn" type="submit" value="send" onclick="return false;"/>
     </div>
@@ -43,18 +42,23 @@
     </div>
 </form>
 <script>
+    $("#fromText").val("").focus();
+
     $(document).ready(function() {
         $("#fromText").val("").focus();
 
         $("#sendBtn").click(function(event){
             event.preventDefault();
 
-            $.post("/send", $("#chatForm").serialize(), function(data) {
-//                alert(data);
+            var fromValue = $("#fromText").val();
+            var messageValue = $("#msgText").val();
+            var sendUrl = '/send/from/' + fromValue + '/message/' + messageValue;
+
+            $.get(sendUrl, function(data) {
+                console.log(data);
             });
 
-            $("#fromText").val("").focus();
-            $("#msgText").val("");
+            $("#msgText").val("").focus();
         });
     });
 </script>
