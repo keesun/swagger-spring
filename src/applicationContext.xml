@@ -15,7 +15,12 @@
     <rabbit:admin connection-factory="rabbitConnectionFactory"/>
     <rabbit:queue name="chat"/>
 
-    <mongo:mongo id="mongo" />
+    <mongo:mongo id="mongo">
+       	<mongo:options 
+                     write-number="1" 
+                     write-timeout="1000"
+			write-fsync="true" />
+	</mongo:mongo>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo"/>
         <constructor-arg value="keynote-database"/>
